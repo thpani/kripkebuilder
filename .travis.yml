@@ -4,6 +4,10 @@ node_js:
 
 env: BROWSERS=firefox E2E_BROWSERS=Firefox
 
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++
+
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
