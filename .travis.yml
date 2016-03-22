@@ -18,4 +18,5 @@ before_script:
 
 script:
   - gulp connect &
+  - webdriver-manager start &
   - npm run protractor
