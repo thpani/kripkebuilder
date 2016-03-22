@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kripke Builder</title>
+    <!-- bower:css -->
+    <!-- bower installed css files will go here... -->
+    <!-- endinject -->
+    <!-- inject:css -->
+    <!-- built css files will go here... -->
+    <!-- endinject -->
+    <style>
+      .help-block {
+        font-size: 12px;
+      }
+      #cy {
+        height: 500px;
+        background-color: #EEEEFA;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      #result {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      #result pre code.error {
+        color: #c7254e;
+      }
+      #nodectrl {
+        position: absolute;
+        right: 25px;
+        top: 20px;
+        width: 10em;
+      }
+      #nodectrl button {
+        margin-top: 5px;
+      }
+      #formula {
+        width: 250px;
+      }
+    </style>
+  </head>
+
+  <body ng-app="kripkeBuilder">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Kripke Builder</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="http://github.com/thpani/kripkebuilder">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid" ng-controller="KripkeController">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="btn-toolbar" role="toolbar">
+            <button type="button" class="btn btn-default" ng-click="open()"><i class="fa fa-folder-open-o"></i> Open</button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" ng-click="saveJson()"><i class="fa fa-floppy-o"></i> Save</button>
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="#" ng-click="saveJson()">Save as JSON</a></li>
+                <!-- <li role="separator" class="divider"></li> -->
+                <li><a href="#" ng-click="savePng()">Save as PNG</a></li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                <i class="fa fa-files-o"></i> Samples
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li ng-repeat="example in exampleArray"><a href="#" ng-click="loadExample(example)">{{example}}</a></li>
+              </ul>
+            </div>
+
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default" ng-click="cy.fit([], 50)"><i class="fa fa-arrows"></i> Fit graph</button>
+              <button type="button" class="btn btn-default" ng-click="cy.layout({name: 'cose'})"><i class="fa fa-arrows-alt"></i> Layout graph</button>
+              <button type="button" class="btn btn-default" ng-click="clear()"><i class="fa fa-trash"></i> Clear canvas</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div id="cy"></div>
+          <form class="form" id="nodectrl">
+            <input type="text" class="form-control" placeholder="Node labels" ng-disabled="selectedNode === null || cy.nodes('#'+selectedNode).empty()" ng-model="labels" ng-list="," ng-change="updateLabels()">
+            <button type="button" class="form-control btn btn-default" ng-disabled="selectedNode === null" ng-click="delete()"><i class="fa fa-trash"></i> Delete</button>
+            <button type="button" class="form-control btn btn-default" ng-class="{active: drawEdges}" ng-click="drawEdges = drawEdges ? false : true"><i class="fa fa-pencil"></i> Draw edges</button>
+          </form>
+          <form class="form-inline" ng-submit="checkFormula()">
+            <input type="text" class="form-control" id="formula" placeholder="Formula (CTL or LTL)" ng-model="formula" ng-change="response = null">
+            <div class="btn-group">
+              <button type="submit" class="btn btn-primary" ng-disabled="formula.trim().length == 0">Check</button>
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" ng-disabled="formula.trim().length == 0">
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#" ng-click="formulae.push(formula)">Remember formula</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="btn-group" ng-show="formulae.length > 0">
+              <button ng-repeat="formula in formulae" ng-click="checkFormula(formula)" class="btn btn-default">{{formula}}</button>
+            </div>
+            <span class="help-block">Accepts NuSMV <a href="http://nusmv.fbk.eu/NuSMV/userman/v26/nusmv.pdf#subsection.2.4.1" target="_blank">CTL</a> or <a href="http://nusmv.fbk.eu/NuSMV/userman/v26/nusmv.pdf#subsection.2.4.3" target="_blank">LTL</a> specifications.</span>
+          </form>
+          <div id="result" ng-show="result"><pre><code ng-class="{error: response.kind == 'error'}">{{result}}</code></pre></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- bower:js -->
+    <!-- bower installed scripts will go here... -->
+    <!-- endinject -->
+    <!-- inject:js -->
+    <!-- app scripts will go here... -->
+    <!-- endinject -->
+  </body>
+</html> 

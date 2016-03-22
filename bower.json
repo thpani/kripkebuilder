@@ -1,0 +1,24 @@
+{
+  "name": "Kripke Builder",
+  "authors": [
+    "Thomas Pani <thomas.pani@gmail.com>"
+  ],
+  "description": "Interactive frontend for manipulating kripke structures and evaluating temporal logic formulae.",
+  "moduleType": [],
+  "homepage": "https://github.com/thpani/kripke-builder#readme",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.2",
+    "cytoscape": "http://js.cytoscape.org/download/cytoscape.js-snapshot-e9ba43d326-1458149978215.zip",
+    "spin.js": "^2.3.2",
+    "bootstrap": "^3.3.6",
+    "font-awesome": "fontawesome#^4.5.0"
+  }
+}
