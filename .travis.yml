@@ -28,4 +28,4 @@ script:
   - npm run protractor
 
 after_script:
-  - bash -c 'for f in /tmp/*.png ; do cat "$f" | base64 | curl -F \'sprunge=<-\' http://sprunge.us ; done'
+  - bash -c 'for f in /tmp/*.png ; do cat "$f" | base64 | curl -F "sprunge=<-" http://sprunge.us ; done'
