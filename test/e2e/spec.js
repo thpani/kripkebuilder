@@ -21,7 +21,7 @@ var download = function(formula, image) {
 
   var deferred = Q.defer();
 
-  element(by.id('cy')).evaluate("cy.style().selector('node').style({ 'font-family': 'Arial' }).update()");
+  element(by.id('cy')).evaluate("cy.style().selector('node').style({ 'font-family': 'Liberation Sans' }).update()");
   element(by.id('cy')).evaluate('savePng()').then(function() {
 
     browser.driver.wait(function() {
