@@ -21,21 +21,25 @@ var download = function(formula, image) {
   element(by.id('cy')).evaluate('savePng()');
 
   var deferred = Q.defer();
-  browser.driver.wait(function() {
-    return fs.existsSync(filename);
-  }, 30000).then(function() {
-    fs.renameSync(filename, '/tmp/'+image);
-    resemble('/tmp/'+image)
-    .compareTo('test/e2e/screenshots/'+image)
-    .onComplete(function(result){
-      expect(result.misMatchPercentage).toBe('0.00', "Image for '" + formula + "' differed by " + result.misMatchPercentage + "%");
-      deferred.resolve();
-    });
+    browser.driver.wait(function() {
+      return fs.existsSync(filename);
+    }, 30000).then(function() {
+      fs.renameSync(filename, '/tmp/'+image);
+        resemble('/tmp/'+image)
+        .compareTo('test/e2e/screenshots/'+image)
+        .onComplete(function(result){
+          expect(result.misMatchPercentage).toBe('0.00', "Image for '" + formula + "' differed by " + result.misMatchPercentage + "%");
+          deferred.resolve();
+        });
   });
   return deferred.promise;
 };
 
 beforeEach(function() {
+  var width = 1024;
+  var height = 768;
+  browser.driver.manage().window().setSize(width, height);
+
   browser.get('http://localhost:8080/');
 });
 
