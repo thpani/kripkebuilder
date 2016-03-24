@@ -18,20 +18,33 @@ var download = function(formula, image) {
   if (fs.existsSync(filename)) {
     fs.unlinkSync(filename);
   }
-  element(by.id('cy')).evaluate('savePng()');
 
   var deferred = Q.defer();
+
+  element(by.id('cy')).evaluate('savePng()').then(function() {
+
     browser.driver.wait(function() {
       return fs.existsSync(filename);
     }, 30000).then(function() {
       fs.renameSync(filename, '/tmp/'+image);
+
+      try {
+        fs.accessSync('test/e2e/screenshots/'+image, fs.R_OK);
+
         resemble('/tmp/'+image)
         .compareTo('test/e2e/screenshots/'+image)
         .onComplete(function(result){
           expect(result.misMatchPercentage).toBe('0.00', "Image for '" + formula + "' differed by " + result.misMatchPercentage + "%");
           deferred.resolve();
         });
+      } catch (e) {
+        expect(false).toBe(true, "Comarison screenshot for '"+image+"' is missing");
+
+        deferred.resolve();
+      }
+    });
   });
+
   return deferred.promise;
 };
 
