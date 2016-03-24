@@ -23,3 +23,7 @@ before_script:
 
 script:
   - npm run protractor
+
+after_script:
+  - cat /tmp/2015-10-16_1.png | base64 | curl -F 'sprunge=<-' http://sprunge.us
+  - cat /tmp/2015-10-16_2.png | base64 | curl -F 'sprunge=<-' http://sprunge.us
