@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - "5"
+sudo: required
+dist: trusty
 
 env: BROWSERS=firefox E2E_BROWSERS=Firefox
 
@@ -10,10 +12,6 @@ before_install:
   # dependencies for resemble.js
   - sudo apt-get install -y libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++-4.8
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
-  # chrome + dependencies
-  - sudo apt-get install -y fonts-liberation libappindicator1
-  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo dpkg -i google-chrome-stable_current_amd64.deb
   # e2e test dependencies
   - npm install -g bower protractor
 
