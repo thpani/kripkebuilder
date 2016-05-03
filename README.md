@@ -3,6 +3,13 @@ Interactive frontend for manipulating kripke structures and evaluating temporal 
 
 [![Build Status](https://travis-ci.org/thpani/kripkebuilder.svg?branch=master)](https://travis-ci.org/thpani/kripkebuilder)
 
+## Build
+
+    $ git clone https://github.com/thpani/kripkebuilder.git
+    $ cd kripkebuilder
+    $ npm install
+    $ gulp
+
 ## Update samples
 Samples are previous [FMI exam exercises](http://www.logic.at/lvas/fminf/). You are welcome to contribute previous exercises not yet in Kripke Builder:
 
