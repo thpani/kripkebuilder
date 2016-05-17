@@ -115,7 +115,7 @@
               </div>
             </div>
             <div class="btn-group" ng-show="formulae.length > 0">
-              <button ng-repeat="formula in formulae" ng-click="checkFormula(formula)" class="btn btn-default">{{formula}}</button>
+              <button ng-repeat="formula in formulae" ng-click="$parent.formula = formula" class="btn btn-default">{{formula}}</button>
             </div>
             <span class="help-block">Accepts NuSMV <a href="http://nusmv.fbk.eu/NuSMV/userman/v26/nusmv.pdf#subsection.2.4.1" target="_blank">CTL</a> or <a href="http://nusmv.fbk.eu/NuSMV/userman/v26/nusmv.pdf#subsection.2.4.3" target="_blank">LTL</a> specifications.</span>
           </form>
