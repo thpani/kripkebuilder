@@ -5,11 +5,6 @@ var gulp = require('gulp'),
 
 var bowerFiles = mainBowerFiles({
   overrides: {
-    cytoscape: {
-      main: [
-        './cytoscape.js'
-      ]
-    },
     bootstrap: {
       main: [
         './dist/js/bootstrap.js',
