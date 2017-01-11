@@ -236,6 +236,37 @@ angular
       }
     };
   })
+  .controller('KripkeSimController', function($scope, $http) {
+    $scope.checkSim = function() {
+      var data = {
+        k1: { nodes: $scope.ks1.getNodes() },
+        k2: { nodes: $scope.ks2.getNodes() },
+      };
+
+      var target = document.getElementsByTagName('kripke-canvas')
+      target = target[0];
+      var spinner = new Spinner({scale:2}).spin(target);
+
+      $http.post('http://localhost:9000/sim', JSON.stringify(data)).then(
+        function(response) {
+          spinner.stop();
+          $scope.result = "K1 >= K2: " + response.data.k1_simulates_k2 + "\n";
+          response.data.simrel_k1.forEach(function(pair) {
+            $scope.result += "("+pair[0]+","+pair[1]+")\n";
+          });
+          $scope.result += "\n\n";
+          $scope.result += "K2 >= K1: " + response.data.k2_simulates_k1 + "\n";
+          response.data.simrel_k2.forEach(function(pair) {
+            $scope.result += "("+pair[0]+","+pair[1]+")\n";
+          });
+        },
+        function(response) {
+          spinner.stop();
+          console.error(response);
+        }
+      );
+    };
+  })
   .controller('KripkeController', function($scope, $http) {
     $scope.formula = '';
     $scope.formulae = [];

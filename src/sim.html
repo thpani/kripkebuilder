@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kripke Builder</title>
+    <!-- bower:css -->
+    <!-- bower installed css files will go here... -->
+    <!-- endinject -->
+    <!-- inject:css -->
+    <!-- built css files will go here... -->
+    <!-- endinject -->
+    <style>
+      .help-block {
+        font-size: 12px;
+      }
+      .cy {
+        height: 500px;
+        background-color: #EEEEFA;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      #result {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      #result pre code.error {
+        color: #c7254e;
+      }
+      #nodectrl {
+        position: absolute;
+        right: 25px;
+        top: 20px;
+        width: 10em;
+      }
+      #nodectrl button {
+        margin-top: 5px;
+      }
+      #formula {
+        width: 250px;
+      }
+    </style>
+  </head>
+
+  <body ng-app="kripkeBuilder" ng-controller="KripkeSimController">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Kripke Builder</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Satisfiability</a></li>
+            <li><a href="#">Simulation</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://github.com/thpani/kripkebuilder">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <kripke-canvas ks="ks1" prefix="s"></kripke-canvas>
+        </div>
+        <div class="col-md-6">
+          <kripke-canvas ks="ks2" prefix="t"></kripke-canvas>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <form class="form-inline" ng-submit="checkSim()">
+            <button type="submit" class="btn btn-primary">Check simulation</button>
+          </form>
+          <div id="result" ng-show="result"><pre><code ng-class="{error: response.kind == 'error'}">{{result}}</code></pre></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- bower:js -->
+    <!-- bower installed scripts will go here... -->
+    <!-- endinject -->
+    <!-- inject:js -->
+    <!-- app scripts will go here... -->
+    <!-- endinject -->
+  </body>
+</html> 
