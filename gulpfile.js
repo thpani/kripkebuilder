@@ -27,15 +27,20 @@ gulp.task('js', function() {
   return gulp.src('src/*.js')
     .pipe(gulp.dest('build'));
 });
+gulp.task('css', function() {
+  return gulp.src('src/*.css')
+    .pipe(gulp.dest('build'));
+});
 gulp.task('bower', function() {
   return gulp.src(bowerFiles, {base: 'bower_components'})
     .pipe(gulp.dest('build/lib'));
 });
 
-gulp.task('inject', ['bower', 'js'], function() {
+gulp.task('inject', ['bower', 'js', 'css'], function() {
   return gulp.src('src/*.html')
     .pipe(inject(gulp.src(bowerFiles, {read: false}), {ignorePath: 'bower_components', addPrefix: 'lib', addRootSlash: false, name: 'bower'}))
     .pipe(inject(gulp.src('src/*.js', {read: false}), {ignorePath: 'src', addRootSlash: false}))
+    .pipe(inject(gulp.src('src/*.css', {read: false}), {ignorePath: 'src', addRootSlash: false}))
     .pipe(gulp.dest('build'));
 });
 
