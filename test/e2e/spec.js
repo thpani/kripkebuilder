@@ -54,7 +54,7 @@ beforeEach(function() {
   var height = 768;
   browser.driver.manage().window().setSize(width, height);
 
-  browser.get('http://localhost:8080/');
+  browser.get('http://localhost:8080/sat.html');
 });
 
 describe('kripke builder homepage', function() {

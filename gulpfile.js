@@ -38,7 +38,7 @@ gulp.task('bower', function() {
 });
 
 gulp.task('inject', ['bower', 'js'], function() {
-  return gulp.src('src/index.html')
+  return gulp.src('src/*.html')
     .pipe(inject(gulp.src(bowerFiles, {read: false}), {ignorePath: 'bower_components', addPrefix: 'lib', addRootSlash: false, name: 'bower'}))
     .pipe(inject(gulp.src('src/*.js', {read: false}), {ignorePath: 'src', addRootSlash: false}))
     .pipe(gulp.dest('build'));

@@ -42,7 +42,7 @@
     </style>
   </head>
 
-  <body ng-app="kripkeBuilder">
+  <body ng-app="kripkeBuilder" ng-controller="KripkeController">
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -56,50 +56,15 @@
       </div>
     </nav>
 
-    <div class="container-fluid" ng-controller="KripkeController">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <div class="btn-toolbar" role="toolbar">
-            <button type="button" class="btn btn-default" ng-click="open()"><i class="fa fa-folder-open-o"></i> Open</button>
-            <div class="btn-group">
-              <button type="button" class="btn btn-default" ng-click="saveJson()"><i class="fa fa-floppy-o"></i> Save</button>
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a href="#" ng-click="saveJson()">Save as JSON</a></li>
-                <!-- <li role="separator" class="divider"></li> -->
-                <li><a href="#" ng-click="savePng()">Save as PNG</a></li>
-              </ul>
-            </div>
-            <div class="btn-group">
-              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                <i class="fa fa-files-o"></i> Samples
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu">
-                <li ng-repeat="example in exampleArray"><a href="#" ng-click="loadExample(example)">{{example}}</a></li>
-              </ul>
-            </div>
-
-            <div class="btn-group" role="group">
-              <button type="button" class="btn btn-default" ng-click="cy.fit([], 50)"><i class="fa fa-arrows"></i> Fit graph</button>
-              <button type="button" class="btn btn-default" ng-click="cy.layout({name: 'cose'})"><i class="fa fa-arrows-alt"></i> Layout graph</button>
-              <button type="button" class="btn btn-default" ng-click="clear()"><i class="fa fa-trash"></i> Clear canvas</button>
-            </div>
-          </div>
+          <kripke-canvas ks="ks" on-select-node="setResult()" on-load="onLoad(graph)" on-change="response = null" formulae="formulae"></kripke-canvas>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-12">
-          <div id="cy"></div>
-          <form class="form" id="nodectrl">
-            <input type="text" class="form-control" placeholder="Node labels" ng-disabled="selectedNode === null || cy.nodes('#'+selectedNode).empty()" ng-model="labels" ng-list="," ng-change="updateLabels()">
-            <button type="button" class="form-control btn btn-default" ng-disabled="selectedNode === null" ng-click="delete()"><i class="fa fa-trash"></i> Delete</button>
-            <button type="button" class="form-control btn btn-default" ng-class="{active: drawEdges}" ng-click="drawEdges = drawEdges ? false : true"><i class="fa fa-pencil"></i> Draw edges</button>
-          </form>
           <form class="form-inline" ng-submit="checkFormula()">
             <input type="text" class="form-control" id="formula" placeholder="Formula (CTL or LTL)" ng-model="formula" ng-change="response = null">
             <div class="btn-group">
