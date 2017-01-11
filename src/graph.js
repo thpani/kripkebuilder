@@ -171,6 +171,7 @@ angular
           selector: 'edge',
           style: {
             width: '2px',
+            'curve-style': 'bezier',
             'line-color': '#888',
             'target-arrow-color': '#888',
             'target-arrow-shape': 'triangle'
@@ -201,7 +202,7 @@ angular
             if (scope.selectedNode === null) {
               cy.add({
                 group: "nodes",
-                data: { id: scope.prefix + scope.nodeCounter, labels: [] },
+                data: { id: (scope.prefix !== undefined ? scope.prefix : "s") + scope.nodeCounter, labels: [] },
                 renderedPosition: event.cyRenderedPosition
               });
               scope.nodeCounter++;
