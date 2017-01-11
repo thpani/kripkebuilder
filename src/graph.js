@@ -1,6 +1,12 @@
 var baseURL = 'http://gensat-thpani.rhcloud.com/';
 angular
   .module('kripkeBuilder', [])
+  .directive('kripkeNav', function() {
+    return {
+      templateUrl: 'kripke-nav.html',
+      scope: { mod: '=' }
+    };
+  })
   .directive('kripkeCanvas', function() {
     function link(scope, element, attrs) {
       scope.nodeCounter = 0;
