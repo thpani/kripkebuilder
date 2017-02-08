@@ -35,7 +35,7 @@ var download = function(formula, image) {
         resemble('/tmp/'+image)
         .compareTo('test/e2e/screenshots/'+image)
         .onComplete(function(result){
-          expect(result.misMatchPercentage).toBe('0.00', "Image for '" + formula + "' differed by " + result.misMatchPercentage + "%");
+          expect(result.misMatchPercentage).toBeLessThan(0.1, "Image for '" + formula + "' differed by " + result.misMatchPercentage + "%");
           deferred.resolve();
         });
       } catch (e) {
