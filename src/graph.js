@@ -15,11 +15,6 @@ angular
       scope.result = null;
       scope.drawEdges = null;
 
-      scope.exampleArray = [];
-      for (key in exampleArray) { // exampleArray is an Object
-        scope.exampleArray.unshift(key);
-      }
-
       scope.ks = {};
       scope.ks.getSelectedNode = function() { return scope.selectedNode; };
       scope.ks.isLeftTotal = function() {
@@ -54,7 +49,7 @@ angular
         }
       };
 
-      scope.load = function(graph) {
+      scope.ks.load = function(graph) {
         scope.onLoad({graph:graph});
 
         scope.clear();
@@ -70,11 +65,11 @@ angular
           })
         ) + 1;
       };
-      scope.loadExample = function(idx) {
+      scope.ks.loadExample = function(idx) {
         var example = exampleArray[idx];
-        scope.load(example);
+        scope.ks.load(example);
       };
-      scope.open = function() {
+      scope.ks.open = function() {
         var i = document.createElement('input');
         i.type = 'file';
         i.accept = '.json';
@@ -84,7 +79,7 @@ angular
           reader.onload = function(e) {
             try {
               var graph = JSON.parse(reader.result);
-              scope.load(graph);
+              scope.ks.load(graph);
             } catch (err) {
               console.log (err);
               scope.response = {
@@ -98,6 +93,8 @@ angular
           }
           reader.readAsText(file);	
         });
+        i.style.display = "none";
+        document.body.appendChild(i);
         i.click();
       };
       var save = function(download, href) {
@@ -107,7 +104,7 @@ angular
         a.click();
         a.remove();
       };
-      scope.saveJson = function() {
+      scope.ks.saveJson = function() {
         var json = scope.cy.json();
         var graph = { elements: {} };
         if (json.elements.edges !== undefined) {
@@ -122,7 +119,7 @@ angular
         var jsonString = JSON.stringify(graph, null, 2);
         save('graph.json', 'data:text/json;charset=utf-8,' + encodeURIComponent(jsonString));
       };
-      scope.savePng = function() {
+      scope.ks.savePng = function() {
         save('graph.png', scope.cy.png());
       };
       scope.updateLabels = function() {
@@ -278,6 +275,11 @@ angular
     $scope.formula = '';
     $scope.formulae = [];
     $scope.response = null;
+
+    $scope.exampleArray = [];
+    for (key in exampleArray) { // exampleArray is an Object
+      $scope.exampleArray.unshift(key);
+    }
 
     $scope.onLoad = function(graph) {
       $scope.formulae = graph.formulae;

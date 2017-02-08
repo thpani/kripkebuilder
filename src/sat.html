@@ -16,9 +16,35 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <kripke-canvas ks="ks" on-select-node="setResult()" on-load="onLoad(graph)" on-change="response = null" formulae="formulae"></kripke-canvas>
+          <div class="btn-toolbar" role="toolbar">
+            <button type="button" class="btn btn-default" ng-click="ks.open()"><i class="fa fa-folder-open-o"></i> Open</button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" ng-click="ks.saveJson()"><i class="fa fa-floppy-o"></i> Save</button>
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="#" ng-click="ks.saveJson()">Save as JSON</a></li>
+                <!-- <li role="separator" class="divider"></li> -->
+                <li><a href="#" ng-click="ks.savePng()">Save as PNG</a></li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                <i class="fa fa-files-o"></i> Samples
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li ng-repeat="example in exampleArray"><a href="#" ng-click="ks.loadExample(example)">{{example}}</a></li>
+              </ul>
+            </div>
+
+          </div>
         </div>
       </div>
+
+      <kripke-canvas ks="ks" on-select-node="setResult()" on-load="onLoad(graph)" on-change="response = null" formulae="formulae"></kripke-canvas>
 
       <div class="row">
         <div class="col-md-12">

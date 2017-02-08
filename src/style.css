@@ -16,14 +16,18 @@
 #result pre code.error {
   color: #c7254e;
 }
-#nodectrl {
+.nodectrl {
   position: absolute;
   right: 25px;
   top: 20px;
-  width: 10em;
 }
-#nodectrl button {
-  margin-top: 5px;
+.nodectrl button.form-control {
+   margin-top: 5px; 
+}
+.pushdown {
+  position: absolute;
+  top: auto;
+  bottom: 20px;
 }
 #formula {
   width: 250px;
