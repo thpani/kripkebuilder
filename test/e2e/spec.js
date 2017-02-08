@@ -22,7 +22,7 @@ var download = function(formula, image) {
   var deferred = Q.defer();
 
   element(by.css('.cy')).evaluate("cy.style().selector('node').style({ 'font-family': 'Liberation Sans' }).update()");
-  element(by.css('.cy')).evaluate('savePng()').then(function() {
+  element(by.css('.cy')).evaluate('ks.savePng()').then(function() {
 
     browser.driver.wait(function() {
       return fs.existsSync(filename);
