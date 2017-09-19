@@ -1,4 +1,4 @@
-var baseURL = 'http://gensat-thpani.rhcloud.com/';
+var baseURL = 'https://gensat-thpani.rhcloud.com/';
 angular
   .module('kripkeBuilder', [])
   .directive('kripkeNav', function() {
