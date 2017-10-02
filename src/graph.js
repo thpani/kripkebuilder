@@ -1,4 +1,4 @@
-var baseURL = 'https://gensat-thpani.rhcloud.com/';
+var baseURL = 'http://gensat-gensat.193b.starter-ca-central-1.openshiftapps.com/';
 angular
   .module('kripkeBuilder', [])
   .directive('kripkeNav', function() {
