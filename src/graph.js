@@ -1,4 +1,4 @@
-var baseURL = 'https://gensat-gensat.7e14.starter-us-west-2.openshiftapps.com';
+var baseURL = 'https://gensat-gensat.7e14.starter-us-west-2.openshiftapps.com/';
 angular
   .module('kripkeBuilder', [])
   .directive('kripkeNav', function() {
