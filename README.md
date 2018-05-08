@@ -1,7 +1,5 @@
-# kripkebuilder
+# kripkebuilder [![Build Status](https://travis-ci.org/thpani/kripkebuilder.svg?branch=master)](https://travis-ci.org/thpani/kripkebuilder)
 Interactive frontend for manipulating kripke structures and evaluating temporal logic formulae.
-
-[![Build Status](https://travis-ci.org/thpani/kripkebuilder.svg?branch=master)](https://travis-ci.org/thpani/kripkebuilder)
 
 ## Build
 
