@@ -3,6 +3,8 @@ node_js:
   - "6"
 sudo: required
 dist: trusty
+addons:
+  chrome: stable
 
 env: BROWSERS=firefox E2E_BROWSERS=Firefox
 
