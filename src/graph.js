@@ -1,4 +1,4 @@
-var baseURL = 'https://gensat.herokuapp.com/';
+var baseURL = 'https://docker.dbai.tuwien.ac.at/';
 angular
   .module('kripkeBuilder', [])
   .directive('kripkeNav', function() {
